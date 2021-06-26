@@ -18,13 +18,18 @@ function updateSubtotal(product) {
 
 function calculateAll() {
   const productRows = document.getElementsByClassName('product');
+  let totalSum = 0;
   for (i = 0; i < productRows.length; i++) {
     updateSubtotal(productRows[i]);
+    totalSum += updateSubtotal(productRows[i]);
   }
-  console.log(productRows);
 
-  // ITERATION 3
-  //... your code goes here
+  // ########################
+  // ## Iteration 3: Total ##
+  // ########################
+
+  const totalSumElement = document.querySelector('#total-value span');
+  totalSumElement.innerHTML = totalSum;
 }
 
 // ITERATION 4
