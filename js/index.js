@@ -32,9 +32,9 @@ function calculateAll() {
   totalSumElement.innerHTML = totalSum;
 }
 
-// #####################################
-// ## Iteration 4: Removing a product ##
-// #####################################
+// ###########################################
+// ## Bonus Iteration 4: Removing a product ##
+// ###########################################
 
 function removeProduct(event) {
   const target = event.currentTarget.parentNode.parentNode;
@@ -43,19 +43,41 @@ function removeProduct(event) {
   calculateAll();
 }
 
-// ITERATION 5
+// ##############################################
+// ## Bonus Iteration 5: Creating new products ##
+// ##############################################
 
 function createProduct() {
-  //... your code goes here
+  const prodListElement = document.querySelector('tbody');
+
+  // get Product name + price
+  const prodName = document.querySelector('#product-name').value;
+  const prodPrice = document.querySelector('#product-price').value;
+
+  // new Product row
+  prodListElement.innerHTML += `<tr class="product"><td class="name"><span> ${prodName} </span></td>
+  <td class="price">$<span> ${prodPrice} </span></td><td class="quantity">
+  <input type="number" value="0" min="0" placeholder="Quantity" /></td><td class="subtotal">$<span>0</span></td>
+  <td class="action"><button class="btn btn-remove">Remove</button></td></tr>`;
+
+  // re-add EventListeners to remove buttons
+  const removeBtnsElements = document.querySelectorAll('.btn-remove');
+  for (button of removeBtnsElements) {
+    button.addEventListener('click', removeProduct);
+  }
+  console.log(prodListElement);
 }
 
 window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
+
+  // add remove buttons EventListeners
   const removeBtnsElements = document.querySelectorAll('.btn-remove');
   for (button of removeBtnsElements) {
     button.addEventListener('click', removeProduct);
   }
-  console.log(removeBtnsElements);
-  //... your code goes here
+  // add create product EventListener
+  const createButton = document.querySelector('#create');
+  createButton.addEventListener('click', createProduct);
 });
